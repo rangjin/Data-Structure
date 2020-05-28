@@ -1,6 +1,23 @@
-/*
-#include "Stack.h"
+#pragma once
+#include <iostream>
+
 using namespace std;
+
+template <class T>
+class Stack {
+    private:
+        T *stack;
+        int top;
+        int capacity;
+
+    public:
+        Stack(int stackCapacity = 10);
+        bool IsEmpty() const;
+        T& Top() const;
+        void Push (const T& item);
+        void Pop();
+        void ChangeSize1D(T *&a, const int oldSize, const int newSize);
+};
 
 template <class T>
 Stack<T>::Stack (int stackCapacity) : capacity (stackCapacity) {
@@ -45,4 +62,3 @@ void Stack<T>::ChangeSize1D(T *&a, const int oldSize, const int newSize) {
     delete[] a;
     a = temp;
 }
-*/
