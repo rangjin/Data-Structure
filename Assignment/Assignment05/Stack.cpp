@@ -1,4 +1,3 @@
-/*
 #include "Stack.h"
 using namespace std;
 
@@ -45,4 +44,3 @@ void Stack<T>::ChangeSize1D(T *&a, const int oldSize, const int newSize) {
     delete[] a;
     a = temp;
 }
-*/
