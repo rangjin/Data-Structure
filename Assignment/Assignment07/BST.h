@@ -141,15 +141,15 @@ class BST {
                     delete currentNode;
                     return;
                 }
-
-                s -> rightChild = b -> leftChild = 0;
-                small.root = sHead -> rightChild;
-                delete sHead;
-                big.root = bHead -> leftChild;
-                delete bHead;
-                mid = 0;
-                return;
             }
+
+            s -> rightChild = b -> leftChild = 0;
+            small.root = sHead -> rightChild;
+            delete sHead;
+            big.root = bHead -> leftChild;
+            delete bHead;
+            mid = 0;
+            return;
         }
 
         void Inorder() {
@@ -165,6 +165,6 @@ class BST {
         }
 
         void Visit(TreeNode<pair<K, E>> *currentNode) {
-            cout << currentNode -> data.first << " " << currentNode -> data.second << endl;
+            cout << currentNode -> data.first << " ";
         }
 };
