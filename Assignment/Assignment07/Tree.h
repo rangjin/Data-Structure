@@ -51,18 +51,90 @@ class Tree {
             return new TreeNode<T>(origNode -> data, Copy(origNode -> leftChild), Copy(origNode -> rightChild));
         }
 
-        void Insert(T n) {
-            Insert(root, n);
+        int Height(TreeNode<T>* currentNode) {
+            int h = 0;
+            if (currentNode != NULL) {
+                int left = Height(currentNode -> leftChild);
+                int right = Height(currentNode -> rightChild);
+                int maxHeight = max(left, right);
+                h = maxHeight + 1;
+            }
+            return h;
+        } 
+        
+        int Diff(TreeNode<T>* currentNode) {
+            int left = Height(currentNode -> leftChild);
+            int right = Height(currentNode -> rightChild);
+            int f = left - right;
+            return f;
         }
 
-        void Insert(TreeNode<T> *&currentNode, T n) {
+        TreeNode<T>* RR(TreeNode<T>* parent) {
+            TreeNode<T>* temp;
+            temp = parent->rightChild;
+            parent -> rightChild = temp -> leftChild;
+            temp -> leftChild = parent;
+            return temp;
+        }
+
+        TreeNode<T>* LL(TreeNode<T>* parent) {
+            TreeNode<T>* temp;
+            temp = parent->leftChild;
+            parent -> leftChild = temp -> rightChild;
+            temp -> rightChild = parent;
+            return temp;
+        }
+
+        TreeNode<T>* LR(TreeNode<T>* parent) {
+            TreeNode<T>* temp;
+            temp = parent->leftChild;
+            parent -> leftChild = RR(temp);
+            return LL(parent);
+        }
+
+        TreeNode<T>* RL(TreeNode<T>* parent) {
+           TreeNode<T>* temp;
+            temp = parent->rightChild;
+            parent -> rightChild = LL(temp);
+            return RR(parent);
+        }
+
+        TreeNode<T>* Balance(TreeNode<T>* currentNode) {
+            int f = Diff(currentNode);
+            if (f > 1) {
+                if(Diff(currentNode -> leftChild) > 0) {
+                    currentNode = LL(currentNode);
+                } else {
+                    currentNode = LR(currentNode);
+                }
+            } else if (f < -1) {
+                if (Diff(currentNode -> rightChild) > 0) {
+                    currentNode = RL(currentNode);
+                } else {
+                    currentNode = RR(currentNode);
+                }
+            }
+            return currentNode;
+        }
+
+        void Insert(T n) {
+            root = Insert(root, n);
+        }
+        
+        TreeNode<T>* Insert(TreeNode<T> *&currentNode, T n) {
             if (currentNode == NULL) {
                 currentNode = new TreeNode<T>(n);
+                currentNode -> data = n;
+                currentNode -> leftChild = NULL;
+                currentNode -> rightChild = NULL;
             } else if (n > currentNode -> data) {
                 Insert(currentNode -> rightChild, n);
+                currentNode = Balance(currentNode);
             } else if (n < currentNode -> data) {
                 Insert(currentNode -> leftChild, n);
+                currentNode = Balance(currentNode);
             }
+            return currentNode;
         }
 
         void Inorder() {
