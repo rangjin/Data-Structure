@@ -154,12 +154,13 @@ int main(void) {
     bst.Inorder();
 
     cout << endl << endl <<  "Delete " << arr[5] << " from bst." << endl << endl;
+    bst.Delete(arr[5]);
 
     cout << "Inorder Print bst" << endl;
     bst.Inorder();
 
-    cout << endl << endl << "Split bst to " << arr[5] << endl << endl;
-    bst.Split(arr[5], small, k, big);
+    cout << endl << endl << "Split bst to " << arr[0] << endl << endl;
+    bst.Split(arr[0], small, k, big);
 
     cout << "Inorder Print small" << endl;
     small.Inorder();
