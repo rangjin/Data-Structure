@@ -39,8 +39,7 @@ class BST {
             while (currentNode) {
                 if (r < currentNode -> leftSize) {
                     currentNode = currentNode -> leftChild;
-                } else if (r > currentNode -> leftChild) {
-                    r -= currentNode -> leftChild;
+                } else if (r > currentNode -> leftSize) {
                     currentNode = currentNode -> rightChild;
                 } else {
                     return &currentNode -> data;
@@ -73,10 +72,13 @@ class BST {
             } else {
                 root = p;
             }
+
+            SetLeftSize();
         }
 
         void Delete(const K& k) {
             root = Delete(root, k);
+            SetLeftSize();
         }
 
         TreeNode<pair<K, E>>* Delete(TreeNode<pair<K, E>> *node, const K& k) {
@@ -110,6 +112,22 @@ class BST {
                     node -> data.second = minVal2;
                     return node;
                 }
+            }
+        }
+
+        void SetLeftSize() {
+            SetLeftSize(root);
+        }
+
+        void SetLeftSize(TreeNode<pair<K, E>> *currentNode) {
+            if (currentNode) {
+                SetLeftSize(currentNode -> leftChild);
+                if (currentNode -> leftChild == NULL) {
+                    currentNode -> leftSize = 1;
+                } else {
+                    currentNode -> leftSize = currentNode -> leftChild -> leftSize + 1;
+                }
+                SetLeftSize(currentNode -> rightChild);
             }
         }
 

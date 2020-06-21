@@ -138,9 +138,11 @@ int main(void) {
         cout << "bst isn't empty" << endl << endl;
     }
 
-    for (int i = 0; i < 10; i++) {
-        cout << "Insert " << arr[i] << " to bst." << endl;
-        bst.Insert(pair<int, int>(arr[i], arr[i]));
+    int arr2[4] = {30, 40, 5, 2};
+
+    for (int i = 0; i < 4; i++) {
+        cout << "Insert " << arr2[i] << " to bst." << endl;
+        bst.Insert(pair<int, int>(arr2[i], arr2[i]));
     }
     cout << endl;
 
@@ -150,17 +152,20 @@ int main(void) {
         cout << "bst isn't empty" << endl << endl;
     }
 
-    cout << "Inorder Print bst" << endl;
-    bst.Inorder();
-
-    cout << endl << endl <<  "Delete " << arr[5] << " from bst." << endl << endl;
-    bst.Delete(arr[5]);
+    k = bst.RankGet(2);
+    cout << "Rankget(" << 2 << ")" << endl << k -> first << endl << endl;
 
     cout << "Inorder Print bst" << endl;
     bst.Inorder();
 
-    cout << endl << endl << "Split bst to " << arr[0] << endl << endl;
-    bst.Split(arr[0], small, k, big);
+    cout << endl << endl <<  "Delete " << arr2[3] << " from bst." << endl << endl;
+    bst.Delete(arr2[3]);
+
+    cout << "Inorder Print bst" << endl;
+    bst.Inorder();
+
+    cout << endl << endl << "Split bst to " << arr2[2] << endl << endl;
+    bst.Split(arr2[2], small, k, big);
 
     cout << "Inorder Print small" << endl;
     small.Inorder();

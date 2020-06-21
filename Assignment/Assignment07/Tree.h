@@ -12,6 +12,7 @@ class TreeNode
         T data;
         TreeNode<T> *leftChild;
         TreeNode<T> *rightChild;
+        int leftSize = 1;
 
         TreeNode() {
             
